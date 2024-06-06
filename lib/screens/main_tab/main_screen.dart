@@ -1,4 +1,5 @@
 import 'package:fitness_app/common/color_extension.dart';
+import 'package:fitness_app/common_widgets/combined_gradient.dart';
 import 'package:fitness_app/screens/activity/activity_screen.dart';
 import 'package:fitness_app/screens/goal/goal_screen.dart';
 import 'package:fitness_app/screens/home/home_screen.dart';
@@ -18,6 +19,12 @@ class _MainScreenState extends State<MainScreen> {
     GoalsScreen(),
     ProfileScreen(),
   ];
+
+  final Gradient secondaryGradient = LinearGradient(
+    colors: [TextColor.primaryColor2, TextColor.primaryColor1],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   void _onTabTapped(int index) {
     setState(() {
@@ -39,23 +46,42 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+            activeIcon: GradientIconWithText(
+              icon: Icons.home,
+              label: 'Home',
+              gradient: secondaryGradient,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_run),
             label: 'Activity',
+            activeIcon: GradientIconWithText(
+              icon: Icons.directions_run,
+              label: 'Activity',
+              gradient: secondaryGradient,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.flag),
             label: 'Goals',
+            activeIcon: GradientIconWithText(
+              icon: Icons.flag,
+              label: 'Goals',
+              gradient: secondaryGradient,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
+            activeIcon: GradientIconWithText(
+              icon: Icons.person,
+              label: 'Profile',
+              gradient: secondaryGradient,
+            ),
           ),
         ],
-        selectedItemColor: TextColor.secondaryColor2,
         unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white
+        backgroundColor: Colors.white,
       ),
     );
   }
