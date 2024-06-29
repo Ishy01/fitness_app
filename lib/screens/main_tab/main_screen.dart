@@ -15,13 +15,13 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = [
     HomeScreen(),
-    ActivityScreen(),
+    ActivitiesScreen(),
     GoalsScreen(),
     ProfileScreen(),
   ];
 
   final Gradient secondaryGradient = LinearGradient(
-    colors: [TextColor.primaryColor2, TextColor.primaryColor1],
+    colors: [TextColor.secondaryColor2, TextColor.secondaryColor1],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -35,6 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TextColor.white,
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
@@ -44,6 +45,7 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onTabTapped,
         items: [
           BottomNavigationBarItem(
+            backgroundColor: TextColor.white,
             icon: Icon(Icons.home),
             label: 'Home',
             activeIcon: GradientIconWithText(
@@ -53,6 +55,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           BottomNavigationBarItem(
+            backgroundColor: TextColor.white,
             icon: Icon(Icons.directions_run),
             label: 'Activity',
             activeIcon: GradientIconWithText(
@@ -62,6 +65,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           BottomNavigationBarItem(
+            backgroundColor: TextColor.white,
             icon: Icon(Icons.flag),
             label: 'Goals',
             activeIcon: GradientIconWithText(
@@ -71,6 +75,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           BottomNavigationBarItem(
+            backgroundColor: TextColor.white,
             icon: Icon(Icons.person),
             label: 'Profile',
             activeIcon: GradientIconWithText(
@@ -80,8 +85,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ],
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
+        unselectedItemColor: TextColor.gray,
+        backgroundColor: TextColor.white,
       ),
     );
   }

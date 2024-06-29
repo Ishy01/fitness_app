@@ -1,67 +1,103 @@
+import 'package:fitness_app/common/color_extension.dart';
+import 'package:fitness_app/screens/profile/profile_stat_card';
 import 'package:flutter/material.dart';
+import 'profile_header.dart';
+import 'profile_section_header.dart';
+import 'profile_list_tile.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool _popUpNotification = true;
+
+  void _onListTileTap(String title) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$title pressed')));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: CircleAvatar(
-                radius: 50,
-                // backgroundImage: AssetImage('assets/profile_picture.png'),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Name: John Doe',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Email: john.doe@example.com',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Statistics',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.directions_walk),
-                title: Text('Total Steps'),
-                trailing: Text('150,000'),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.directions_run),
-                title: Text('Total Distance'),
-                trailing: Text('200 km'),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.local_fire_department),
-                title: Text('Total Calories Burned'),
-                trailing: Text('50,000 kcal'),
-              ),
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate to edit profile screen
+    return Scaffold(
+      backgroundColor: TextColor.white,
+      appBar: AppBar(
+        backgroundColor: TextColor.white,
+        title: Text('Profile'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProfileHeader(
+                onEdit: () {
+                  // Handle edit button tap
                 },
-                child: Text('Edit Profile'),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ProfileStatCard(title: 'Height', value: '180cm'),
+                  ProfileStatCard(title: 'Weight', value: '65kg'),
+                  ProfileStatCard(title: 'Age', value: '22yo'),
+                ],
+              ),
+              SizedBox(height: 20),
+              ProfileSectionHeader(title: 'Account'),
+              ProfileListTile(
+                title: 'Personal Data',
+                icon: Icons.person,
+                onTap: () => _onListTileTap('Personal Data'),
+              ),
+              ProfileListTile(
+                title: 'Achievement',
+                icon: Icons.star,
+                onTap: () => _onListTileTap('Achievement'),
+              ),
+              ProfileListTile(
+                title: 'Activity History',
+                icon: Icons.history,
+                onTap: () => _onListTileTap('Activity History'),
+              ),
+              ProfileListTile(
+                title: 'Workout Progress',
+                icon: Icons.fitness_center,
+                onTap: () => _onListTileTap('Workout Progress'),
+              ),
+              SizedBox(height: 20),
+              ProfileSectionHeader(title: 'Notification'),
+              SwitchListTile(
+                title: Text('Pop-up Notification'),
+                value: _popUpNotification,
+                onChanged: (bool value) {
+                  setState(() {
+                    _popUpNotification = value;
+                  });
+                },
+                secondary: Icon(Icons.notifications),
+              ),
+              SizedBox(height: 20),
+              ProfileSectionHeader(title: 'Other'),
+              ProfileListTile(
+                title: 'Contact Us',
+                icon: Icons.mail,
+                onTap: () => _onListTileTap('Contact Us'),
+              ),
+              ProfileListTile(
+                title: 'Privacy Policy',
+                icon: Icons.privacy_tip,
+                onTap: () => _onListTileTap('Privacy Policy'),
+              ),
+              ProfileListTile(
+                title: 'Settings',
+                icon: Icons.settings,
+                onTap: () => _onListTileTap('Settings'),
+              ),
+            ],
+          ),
         ),
       ),
     );
